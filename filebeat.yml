@@ -1,0 +1,19 @@
+filebeat.inputs:
+- type: filestream
+  id: genai_demo_msl
+  enabled: true
+  paths:
+  - /usr/share/filebeat/files/*.ndjson
+  parsers:
+  - ndjson:
+      overwrite_keys: true
+      add_error_key: true
+      expand_keys: true
+      target: ""
+
+output.elasticsearch:
+  index: "book"
+  pipeline: "book-pipeline"
+
+setup.ilm.enabled: false
+setup.template.enabled: false
